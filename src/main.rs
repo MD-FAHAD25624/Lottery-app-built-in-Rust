@@ -25,12 +25,11 @@ fn load_names() -> Vec<String> {
         }
     };
 
-    let list = content
+        content
         .lines()
         .filter(|l| !l.is_empty())
         .map(|l| l.trim().to_string())
-        .collect();
-    list
+        .collect()
 }
 
 fn show_names(list: &[String]) {
@@ -105,7 +104,7 @@ fn lottery(list: &[String]) {
             break;
         }
         let count: usize = match count_input.trim().parse() {
-            Ok(n) if n >= 1 && n <= list.len() => n,
+            Ok(n) if (1..=list.len()).contains(&n) => n,
             Ok(_) | Err(_) => {
                 println!(
                     "Error: Please enter a valid number between 1 and {}.",
@@ -198,7 +197,7 @@ fn main() {
         let mut choice_input = String::new();
         io::stdin().read_line(&mut choice_input).expect("Failed");
         let choice: usize = match choice_input.trim().parse() {
-            Ok(n) if n >= 1 && n <= 5 => n,
+            Ok(n) if (1..=5).contains(&n) => n,
             Ok(_) | Err(_) => {
                 println!("Error: Please enter a number between 1 and 5.");
                 continue;
